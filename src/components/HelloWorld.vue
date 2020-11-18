@@ -1,58 +1,97 @@
+
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+     <div id="app" class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="col-12">
+                        <h3>Veuillez saisir un chiffre entre 1 et 255 :</h3>
+                    <hr />
+                    <div class="form-group">
+                        <label>Vert :</label>
+                        <input class="form-control" v-model="green" type="number" />
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label>Bleu :</label>
+                        <input class="form-control" v-model="blue" type="number" />
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label>Rouge :</label>
+                        <input class="form-control" v-model="red" type="number" />
+                    </div>
+                    <hr />
+                    <div class="col-12">
+                        <button class="btn-primary" @click="saveSquare()">Sauvegarder</button>
+                        <button class="btn-danger" @click="reset()">Annuler</button>
+                    </div>
+                    <hr />
+                        <h3>Nombre de carrés  : {{ nbrOfSquares }} </h3>
+                    <hr />
+                    <div class="col-12" v-if="nbrOfSquares">
+                        <div class="prevsquare" v-for="square in squares" :key="square.id"  @click="selectedSquare=square" :style="{ backgroundColor: square }" ></div>
+                    </div>
+                    <h3 v-else >Ajouter des couleurs !</h3>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="square mx-auto" :style="{ backgroundColor: selectedSquare }"></div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  data() {
+    return {
+            green: 0,
+            blue: 0,
+            red: 0,
+            squares: [],
+            selectedSquare:''
+            }
+          },
+    methods : {
+                resetColor() {
+                    this.red = 0;
+                    this.green = 0;
+                    this.blue = 0;
+                },
+                saveSquare () {
+                   this.squares.push(`rgb(${ this.red },${ this.green },${ this.blue} )`);
+                   this.resetColor();
+                   
+               },
+               reset() {
+                    this.squares = [];
+                    this.resetColor();
+               }
+            },
+    computed: {
+            nbrOfSquares() {
+                return this.squares.length
+                }
+              }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+.square {
+    width: 300px;
+    height: 300px;
+    margin-top: 50px;
+    background-color: #ddd;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.prevsquare {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer; 
 }
 </style>
