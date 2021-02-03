@@ -5,32 +5,52 @@
     class="overflow-hidden"
     >
     
-     <v-container class="grey lighten-5">
+     <v-container class="grey lighten-3">
          <v-row no-gutters>
               <v-col
                 md="6"
                 >
-                <h3>Veuillez saisir un chiffre entre 1 et 255 :</h3>
+                <base-heading class="info--text h3">
+                Veuillez saisir un chiffre entre 1 et 255 :
+                </base-heading>
                     <hr />
-                    <div class="form-group">
-                        <label>Vert :</label>
-                        <input class="form-control" v-model="green" type="number" />
-                    </div>
+                    <v-text-field
+                        v-model="green"
+                        label="Vert"
+                        outlined
+                        clearable
+                        type="number"
+                    ></v-text-field>
+                
+                     <v-text-field
+                        v-model="blue"
+                        label="Bleu"
+                        outlined
+                        clearable
+                        type="number"
+                    ></v-text-field>
+                 
+                    <v-text-field
+                        v-model="red"
+                        label="Rouge"
+                        outlined
+                        clearable
+                        type="number"
+                    ></v-text-field>
                     <hr />
-                    <div class="form-group">
-                        <label>Bleu :</label>
-                        <input class="form-control" v-model="blue" type="number" />
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <label>Rouge :</label>
-                        <input class="form-control" v-model="red" type="number" />
-                    </div>
-                    <hr />
-                    <div class="col-12">
-                        <button class="btn-primary" @click="saveSquare()">Sauvegarder</button>
-                        <button class="btn-danger" @click="reset()">Annuler</button>
-                    </div>
+                    <v-btn 
+                        color="primary"
+                        @click="saveSquare()"
+                    >
+                        Envoyer
+                    </v-btn>
+                    <v-btn 
+                        color="error"
+                        @click="reset()"
+                    >
+                        Reinitialiser
+                    </v-btn>
+
                     <hr />
                         <h3>Nombre de carrés  : {{ nbrOfSquares }} </h3>
                     <hr />
@@ -113,5 +133,4 @@ export default {
     margin-top: 10px;
     cursor: pointer; 
 }
-
 </style>
