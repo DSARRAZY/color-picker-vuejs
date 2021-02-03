@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Picker',
   data() {
     return {
             green: 0,
