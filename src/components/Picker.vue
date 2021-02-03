@@ -1,10 +1,16 @@
 
 <template>
-     <div id="app" class="container">
-        <div class="row">
-            <div class="col-6">
-                <div class="col-12">
-                        <h3>Veuillez saisir un chiffre entre 1 et 255 :</h3>
+    <section
+    id="picker"
+    class="overflow-hidden"
+    >
+    
+     <v-container class="grey lighten-5">
+         <v-row no-gutters>
+              <v-col
+                md="6"
+                >
+                <h3>Veuillez saisir un chiffre entre 1 et 255 :</h3>
                     <hr />
                     <div class="form-group">
                         <label>Vert :</label>
@@ -32,18 +38,29 @@
                         <div class="prevsquare" v-for="square in squares" :key="square.id"  @click="selectedSquare=square" :style="{ backgroundColor: square }" ></div>
                     </div>
                     <h3 v-else >Ajouter des couleurs !</h3>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="square mx-auto" :style="{ backgroundColor: selectedSquare }"></div>
-            </div>
-        </div>
-    </div>
+                </v-col>
+    
+                <v-col
+                    class="text-center pa-5"
+                    cols="12"
+                    md="6"
+                >
+                    <v-row
+                        class="fill-height"
+                    >
+                    <div class="square mx-auto" :style="{ backgroundColor: selectedSquare }"></div>
+                    </v-row>
+                </v-col>
+
+            </v-row>
+        </v-container>
+    </section>
 </template>
 
 <script>
 export default {
   name: 'Picker',
+
   data() {
     return {
             green: 0,
@@ -80,10 +97,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .square {
-    width: 300px;
-    height: 300px;
+    width: 25vw;
+    height: 25vw;
     margin-top: 50px;
     background-color: #ddd;
+    border:solid 2px silver;
+    margin:30px auto;
 }
 
 .prevsquare {
@@ -94,4 +113,5 @@ export default {
     margin-top: 10px;
     cursor: pointer; 
 }
+
 </style>
